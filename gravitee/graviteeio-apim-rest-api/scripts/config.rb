@@ -25,6 +25,10 @@ end
 # Optional configuration to send emails
 @mail_url = URI(ENV["MAIL_URL"]) if ENV["MAIL_URL"]
 
+logback_config = "#{config_dir}/logback.xml"
+logback_config_install = "#{install_dir}/config/logback.xml"
+FileUtils.cp logback_config, logback_config_install
+
 gravitee_config_template = "#{config_dir}/gravitee.yml.erb"
 gravitee_config_install = "#{install_dir}/config/gravitee.yml"
 if File.exists? gravitee_config_template
