@@ -86,8 +86,8 @@ fi
 
 if [ "$GRAVITEE_MODULE" = "graviteeio-apim-portal-ui" -o "$GRAVITEE_MODULE" = "graviteeio-apim-console-ui" ] ; then
   install_nginx "$BUILD_DIR" "$CACHE_DIR" "$ENV_DIR"
-  if [ ! -f "${BUILD_DIR}/nginx.conf.erb" ] ; then
-    cp "${BP_DIR}/gravitee/${GRAVITEE_MODULE}/nginx/nginx.conf.erb" "${BUILD_DIR}"
+  if [ ! -f "${BUILD_DIR}/servers.conf.erb" ] ; then
+    cp "${BP_DIR}/gravitee/${GRAVITEE_MODULE}/nginx/servers.conf.erb" "${BUILD_DIR}"
   fi
 fi
 

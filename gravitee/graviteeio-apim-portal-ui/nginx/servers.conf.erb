@@ -1,0 +1,47 @@
+log_format keyvalue
+  'method=$request_method'
+  ' path="$request_uri"'
+  ' host=$host'
+  ' request_id=$http_x_request_id'
+  ' from="$remote_addr"'
+  ' protocol=$scheme'
+  ' status=$status'
+  ' duration=${request_time}s'
+  ' bytes=$bytes_sent'
+  ' referer="$http_referer"'
+  ' user_agent="$http_user_agent"'<%#
+    To allow dynamic logging format for nginx,
+    create a json that contains the key/value pairs
+    you want to add to nginx logging.
+    For the logs to be correctly parsed, use the nginx_logger_version parameter.
+    For example:
+    ADDITIONAL_NGINX_LOGS='{"nginx_logger_version":"1", "my_custom_header":"$http_my_custom_header"}'
+  %><%
+    require 'json';
+    JSON.parse(ENV['ADDITIONAL_NGINX_LOGS']||'{}').each do |nginx_key,value| %>
+  ' <%= nginx_key %>="<%= value %>"'<% end %>;
+
+# In order to avoid logging access twice per request
+# it is necessary to turn off the top-level (e.g. http) buildpack default access_log
+# as we are about to override it in the server directive here below
+access_log off;
+
+server {
+  index index.html;
+
+  server_name localhost;
+  listen <%= ENV['PORT'] %>;
+
+  root <%= File.join ENV["HOME"], ENV["GRAVITEE_MODULE"] %>;
+
+  access_log logs/access.log keyvalue;
+
+  add_header Content-Security-Policy "frame-ancestors <%= ENV["ALLOWED_FRAME_ANCESTOR_URLS"] %> 'self';" always;
+  add_header X-XSS-Protection "1; mode=block";
+  add_header X-Content-Type-Options nosniff;
+  add_header X-Permitted-Cross-Domain-Policies none;
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}
