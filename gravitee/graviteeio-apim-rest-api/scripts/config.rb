@@ -20,7 +20,7 @@ end
 
 @elasticsearch_url = URI(ENV["ELASTICSEARCH_URL"])
 
-@jdbc_url = ENV["POSTGRESQL_URL"]
+@jdbc_url = ENV["POSTGRESQL_URL"].sub("postgres:", "jdbc:postgresql:")
 
 @admin_password = BCrypt::Password.create(ENV["GRAVITEE_ADMIN_PASSWORD"])
 

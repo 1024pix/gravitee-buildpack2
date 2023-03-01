@@ -20,7 +20,7 @@ end
 
 @elasticsearch_url = URI(ENV["ELASTICSEARCH_URL"])
 
-@jdbc_url = ENV["POSTGRESQL_URL"]
+@jdbc_url = ENV["POSTGRESQL_URL"].sub("postgres:", "jdbc:postgresql:")
 
 # Optional configuration to enable gateway heartbeat
 @heartbeat_enabled = ENV.fetch("GRAVITEE_HEARTBEAT_ENABLED", "false") == "true"
