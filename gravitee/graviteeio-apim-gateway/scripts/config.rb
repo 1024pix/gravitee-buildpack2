@@ -25,7 +25,9 @@ end
 uri = URI.parse(ENV["POSTGRESQL_URL"])
 
 # see https://docs.ruby-lang.org/en/2.1.0/URI.html
-@jdbc_url = "jdbc:postgresql://#{uri.host}:#{uri.port}#{uri.path}#{uri.query}&user=#{uri.user}&password=#{uri.password}"
+@jdbc_url = "jdbc:postgresql://#{uri.host}:#{uri.port}#{uri.path}?#{uri.query}"
+@jdbc_user = uri.user
+@jdbc_pass = uri.password
 
 # Optional configuration to enable gateway heartbeat
 @heartbeat_enabled = ENV.fetch("GRAVITEE_HEARTBEAT_ENABLED", "false") == "true"

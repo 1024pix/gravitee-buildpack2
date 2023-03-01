@@ -119,7 +119,8 @@ management:
   type: jdbc
   jdbc:
     url: <%= @jdbc_url %>
-
+    username: <%= @jdbc_user %>
+    password: <%= @jdbc_pass %>
 # Management repository: clustered MongoDB
 #management:
 #  type: mongodb
