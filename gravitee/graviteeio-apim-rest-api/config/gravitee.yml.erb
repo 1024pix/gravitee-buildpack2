@@ -116,15 +116,15 @@ http:
 # For more information about MongoDB configuration using URI, please have a look to:
 # - http://api.mongodb.org/java/current/com/mongodb/MongoClientURI.html
 management:
-  type: jdbc    
+  type: jdbc
 
-jdbc:                         
+jdbc:
   driver: postgresql
-  host: @jdbc_host
-  port: @jdbc_port
-  database: @jdbc_database
-  username: @jdbc_username
-  password: @jdbc_password
+  host: <%= @jdbc_host %>
+  port: <%= @jdbc_port %>
+  database: <%= @jdbc_database %>
+  username: <%= @jdbc_username %>
+  password: <%= @jdbc_password %>
 
 # Management repository: clustered MongoDB
 #management:
