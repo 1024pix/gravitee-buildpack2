@@ -19,7 +19,10 @@ if ENV["MONGO_URL"].nil?
 end
 
 @elasticsearch_url = URI(ENV["ELASTICSEARCH_URL"])
-@mongo_url = ENV["MONGO_URL"]
+
+@jdbc_url = ENV["JDBC_URL"]
+@jdbc_username = ENV["JDBC_USERNAME"]
+@jdbc_password = ENV["JDBC_PASSWORD"]
 
 # Optional configuration to enable gateway heartbeat
 @heartbeat_enabled = ENV.fetch("GRAVITEE_HEARTBEAT_ENABLED", "false") == "true"

@@ -94,9 +94,15 @@ http:
 # For more information about MongoDB configuration using URI, please have a look to:
 # - http://api.mongodb.org/java/current/com/mongodb/MongoClientURI.html
 management:
-  type: mongodb
-  mongodb:
-    uri: <%= @mongo_url %>
+  type: jdbc                    
+
+jdbc:                         
+  driver: postgresql
+  host: @jdbc_host
+  port: @jdbc_port
+  database: @jdbc_database
+  username: @jdbc_username
+  password: @jdbc_password
 
 # Management repository: clustered MongoDB
 #management:
@@ -114,9 +120,7 @@ management:
 # When defining rate-limiting policy, the gateway has to store data to share with other gateway instances.
 # In this example, we are using MongoDB to store counters.
 ratelimit:
-  type: mongodb
-  mongodb:
-    uri: <%= @mongo_url %>
+  type: jdbc
 
 cache:
   type: ehcache

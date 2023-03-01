@@ -13,13 +13,21 @@ if ENV["ELASTICSEARCH_URL"].nil?
   exit 1
 end
 
-if ENV["MONGO_URL"].nil?
-  puts " !     MONGO_URL is required, have your provisioned an MongoDB addon?"
+if ENV["POSTGRESQL_URL"].nil?
+  puts " !     POSTGRESQL_URL is required, have your provisioned an PostgreSQL addon?"
   exit 1
 end
 
 @elasticsearch_url = URI(ENV["ELASTICSEARCH_URL"])
-@mongo_url = ENV["MONGO_URL"]
+
+uri = URI.parse(ENV["POSTGRESQL_URL"])
+
+@jdbc_host = uri.host
+@jdbc_port = uri.port
+@jdbc_database = uri.path[1..-1] # path start by /
+@jdbc_username = uri.user
+@jdbc_password = uri.password
+
 @admin_password = BCrypt::Password.create(ENV["GRAVITEE_ADMIN_PASSWORD"])
 
 # Optional configuration to send emails
