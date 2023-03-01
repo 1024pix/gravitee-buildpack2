@@ -13,16 +13,20 @@ if ENV["ELASTICSEARCH_URL"].nil?
   exit 1
 end
 
-if ENV["MONGO_URL"].nil?
-  puts " !     MONGO_URL is required, have your provisioned an MongoDB addon?"
+if ENV["POSTGRESQL_URL"].nil?
+  puts " !     POSTGRESQL_URL is required, have your provisioned an PostgreSQL addon?"
   exit 1
 end
 
 @elasticsearch_url = URI(ENV["ELASTICSEARCH_URL"])
 
-@jdbc_url = ENV["JDBC_URL"]
-@jdbc_username = ENV["JDBC_USERNAME"]
-@jdbc_password = ENV["JDBC_PASSWORD"]
+uri = URI.parse(ENV["POSTGRESQL_URL"])
+
+@jdbc_host = uri.host
+@jdbc_port = uri.port
+@jdbc_database = uri.path[1..-1] # path start by /
+@jdbc_username = uri.user
+@jdbc_password = uri.password
 
 # Optional configuration to enable gateway heartbeat
 @heartbeat_enabled = ENV.fetch("GRAVITEE_HEARTBEAT_ENABLED", "false") == "true"
