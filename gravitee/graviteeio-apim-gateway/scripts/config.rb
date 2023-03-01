@@ -20,13 +20,7 @@ end
 
 @elasticsearch_url = URI(ENV["ELASTICSEARCH_URL"])
 
-uri = URI.parse(ENV["POSTGRESQL_URL"])
-
-@jdbc_host = uri.host
-@jdbc_port = uri.port
-@jdbc_database = uri.path[1..-1] # path start by /
-@jdbc_username = uri.user
-@jdbc_password = uri.password
+@jdbc_url = ENV["POSTGRESQL_URL"]
 
 # Optional configuration to enable gateway heartbeat
 @heartbeat_enabled = ENV.fetch("GRAVITEE_HEARTBEAT_ENABLED", "false") == "true"

@@ -95,14 +95,8 @@ http:
 # - http://api.mongodb.org/java/current/com/mongodb/MongoClientURI.html
 management:
   type: jdbc
-
-jdbc:
-  driver: postgresql
-  host: <%= @jdbc_host %>
-  port: <%= @jdbc_port %>
-  database: <%= @jdbc_database %>
-  username: <%= @jdbc_username %>
-  password: <%= @jdbc_password %>
+  jdbc:
+    url: <%= @jdbc_url %>
 
 # Management repository: clustered MongoDB
 #management:
@@ -121,6 +115,8 @@ jdbc:
 # In this example, we are using MongoDB to store counters.
 ratelimit:
   type: jdbc
+  jdbc:
+    url: <%= @jdbc_url %>
 
 cache:
   type: ehcache
