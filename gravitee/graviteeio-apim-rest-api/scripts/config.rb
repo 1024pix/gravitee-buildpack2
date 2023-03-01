@@ -20,7 +20,13 @@ end
 
 @elasticsearch_url = URI(ENV["ELASTICSEARCH_URL"])
 
-@jdbc_url = ENV["POSTGRESQL_URL"].sub("postgres:", "jdbc:postgresql:")
+# jdbc:postgresql://localhost/test?user=fred&password=secret&ssl=true
+# postgres://<user>:<password>@<host>:<port>/<database>?sslmode=prefer
+uri = URI.parse(ENV["POSTGRESQL_URL"])
+
+# see https://docs.ruby-lang.org/en/2.1.0/URI.html
+@jdbc_url = "jdbc:postgresql://#{uri.host}:#{uri.port}#{uri.path}#{uri.query}&user=#{uri.user}&password=#{uri.password}"
+
 
 @admin_password = BCrypt::Password.create(ENV["GRAVITEE_ADMIN_PASSWORD"])
 
