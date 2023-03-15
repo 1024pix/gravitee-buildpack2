@@ -84,7 +84,7 @@ if [ "$GRAVITEE_MODULE" = "graviteeio-apim-rest-api" -o "$GRAVITEE_MODULE" = "gr
   echo "java.runtime.version=11" > "${BUILD_DIR}/system.properties"
   install_jdk "$BUILD_DIR" "$CACHE_DIR"
 
-  install_jdbc "$BUILD_DIR" "$CACHE_DIR"
+  install_jdbc "$BUILD_DIR" "$CACHE_DIR" "$GRAVITEE_MODULE"
 fi
 
 if [ "$GRAVITEE_MODULE" = "graviteeio-apim-portal-ui" -o "$GRAVITEE_MODULE" = "graviteeio-apim-console-ui" ] ; then

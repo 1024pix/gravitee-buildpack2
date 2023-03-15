@@ -5,6 +5,7 @@ install_jdbc() {
   # jvm-common buildpack doesn't work with it.
   local install_dir="$1"
   local cache_dir="$2"
+  local gravitee_module="$3"
   local jdbc_driver="postgresql-42.5.4.jar"
   local cache_jdbc_driver="${cache_dir}/${jdbc_driver}"
 
@@ -12,13 +13,5 @@ install_jdbc() {
     curl --retry 3 --location --output "${cache_jdbc_driver}" "https://jdbc.postgresql.org/download/${jdbc_driver}"
   fi
 
-  if [ ! -f "${cache_jdbc_driver}" ]; then
-    ls "${cache_dir}"
-    echo "ERROR: Can't download jdbc driver"
-    exit 1
-  fi
-
-  set -x
-
-  cp "${cache_jdbc_driver}" "${install_dir}/graviteeio-apim-rest-api/plugins/ext/repository-jdbc/${jdbc_driver}"
+  cp "${cache_jdbc_driver}" "${install_dir}/${gravitee_module}/plugins/ext/repository-jdbc/${jdbc_driver}"
 }
