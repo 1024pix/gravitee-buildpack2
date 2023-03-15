@@ -12,5 +12,13 @@ install_jdbc() {
     curl --retry 3 --location --output "${cache_jdbc_driver}" "https://jdbc.postgresql.org/download/${jdbc_driver}"
   fi
 
+  if [ ! -f "${cache_jdbc_driver}" ]; then
+    ls "${cache_dir}"
+    echo "ERROR: Can't download jdbc driver"
+    exit 1
+  fi
+
+  set -x
+
   cp "${cache_jdbc_driver}" "${install_dir}/graviteeio-apim-rest-api/plugins/ext/repository-jdbc/${jdbc_driver}"
 }
