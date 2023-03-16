@@ -121,6 +121,8 @@ management:
     url: <%= @jdbc_url %>
     username: <%= @jdbc_user %>
     password: <%= @jdbc_pass %>
+    initialSize: 2
+    maxSize: 5
 # Management repository: clustered MongoDB
 #management:
 #  type: mongodb

@@ -99,6 +99,8 @@ management:
     url: <%= @jdbc_url %>
     username: <%= @jdbc_user %>
     password: <%= @jdbc_pass %>
+    initialSize: <%= @jdbc_initial_size %>
+    maxSize: <%= @jdbc_max_size %>
 
 # Management repository: clustered MongoDB
 #management:
@@ -121,6 +123,8 @@ ratelimit:
     url: <%= @jdbc_url %>
     username: <%= @jdbc_user %>
     password: <%= @jdbc_pass %>
+    initialSize: <%= @jdbc_initial_size %>
+    maxSize: <%= @jdbc_max_size %>
 
 cache:
   type: ehcache
