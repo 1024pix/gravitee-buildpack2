@@ -28,7 +28,6 @@ uri = URI.parse(ENV["POSTGRESQL_URL"])
 @jdbc_url = "jdbc:postgresql://#{uri.host}:#{uri.port}#{uri.path}?#{uri.query}"
 @jdbc_user = uri.user
 @jdbc_pass = uri.password
-@jdbc_initial_size = ENV["POSTGRESQL_POOL_INIT_SIZE"].nil? ? 2 : ENV["POSTGRESQL_POOL_INIT_SIZE"]
 @jdbc_max_size = ENV["POSTGRESQL_POOL_MAX_SIZE"].nil? ? 10 : ENV["POSTGRESQL_POOL_MAX_SIZE"]
 
 # Optional configuration to enable gateway heartbeat

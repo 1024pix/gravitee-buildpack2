@@ -100,8 +100,7 @@ management:
     username: <%= @jdbc_user %>
     password: <%= @jdbc_pass %>
     pool:
-      initialSize: <%= @jdbc_initial_size %>
-      maxSize: <%= @jdbc_max_size %>
+      maxPoolSize: <%= @jdbc_max_size %>
 
 # Management repository: clustered MongoDB
 #management:
@@ -125,8 +124,7 @@ ratelimit:
     username: <%= @jdbc_user %>
     password: <%= @jdbc_pass %>
     pool:
-      initialSize: <%= @jdbc_initial_size %>
-      maxSize: <%= @jdbc_max_size %>
+      maxPoolSize: <%= @jdbc_max_size %>
 
 cache:
   type: ehcache
