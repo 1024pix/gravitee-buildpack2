@@ -90,6 +90,7 @@ Common to all modules:
 * `MAIL_URL`: no default, configure which SMTP server should send emails, example: `smtp://username:password@smtpserver.example.com:587`
 * `MAIL_SUBJECT_FORMAT`: no default, configure the format of the subjects of emails being sent, use `%s` for the rest of the subject, example: `[Gravitee.io] %s`
 * `MAIL_SENDER_FROM`: no default, configure which email address with be used to send the emails from, example: `from@example.com`
+* `POSTGRESQL_POOL_MAX_SIZE`: Maximum pool connection size on PostgreSQL
 
 ### graviteeio-gateway
 
@@ -102,6 +103,7 @@ Common to all modules:
 
 * `JVM_COMMON_BUILDPACK`: (optional) by default `https://buildpacks-repository.s3.eu-central-1.amazonaws.com/jvm-common.tar.xz`
 * `GRAVITEE_HEARTBEAT_ENABLED`: (optional) by default `false`, configure wether or not the gateway should report its status to the REST API
+* `POSTGRESQL_POOL_MAX_SIZE`: Maximum pool connection size on PostgreSQL
 
 ### graviteeio-apim-portal-ui
 
