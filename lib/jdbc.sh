@@ -6,6 +6,7 @@ install_jdbc() {
   local install_dir="$1"
   local cache_dir="$2"
   local gravitee_module="$3"
+  # The driver version can be found at https://docs.gravitee.io/apim/3.x/apim_installguide_repositories_jdbc.html
   local jdbc_driver="postgresql-42.5.4.jar"
   local cache_jdbc_driver="${cache_dir}/${jdbc_driver}"
 
