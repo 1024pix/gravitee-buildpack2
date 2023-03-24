@@ -20,11 +20,15 @@ end
 
 @elasticsearch_url = URI(ENV["ELASTICSEARCH_URL"])
 
-# jdbc:postgresql://localhost/test?user=fred&password=secret&ssl=true
-# postgres://<user>:<password>@<host>:<port>/<database>?sslmode=prefer
-uri = URI.parse(ENV["POSTGRESQL_URL"])
-
+# Scalingo export PostregreSQL with an URI that can not be use directly.
+# > postgres://<user>:<password>@<host>:<port>/<database>?sslmode=prefer
+# we want
+# > jdbc:postgresql://localhost/test?sslmode=prefer
+#
+# User and password must be extract
+#
 # see https://docs.ruby-lang.org/en/2.1.0/URI.html
+uri = URI.parse(ENV["POSTGRESQL_URL"])
 @jdbc_url = "jdbc:postgresql://#{uri.host}:#{uri.port}#{uri.path}?#{uri.query}"
 @jdbc_user = uri.user
 @jdbc_pass = uri.password
