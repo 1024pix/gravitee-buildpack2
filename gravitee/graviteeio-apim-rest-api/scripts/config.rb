@@ -13,13 +13,27 @@ if ENV["ELASTICSEARCH_URL"].nil?
   exit 1
 end
 
-if ENV["MONGO_URL"].nil?
-  puts " !     MONGO_URL is required, have your provisioned an MongoDB addon?"
+if ENV["POSTGRESQL_URL"].nil?
+  puts " !     POSTGRESQL_URL is required, have your provisioned an PostgreSQL addon?"
   exit 1
 end
 
 @elasticsearch_url = URI(ENV["ELASTICSEARCH_URL"])
-@mongo_url = ENV["MONGO_URL"]
+
+# Scalingo export PostregreSQL with an URI that can not be use directly.
+# > postgres://<user>:<password>@<host>:<port>/<database>?sslmode=prefer
+# we want
+# > jdbc:postgresql://localhost/test?sslmode=prefer
+#
+# User and password must be extract
+#
+# see https://docs.ruby-lang.org/en/2.1.0/URI.html
+uri = URI.parse(ENV["POSTGRESQL_URL"])
+@jdbc_url = "jdbc:postgresql://#{uri.host}:#{uri.port}#{uri.path}?#{uri.query}"
+@jdbc_user = uri.user
+@jdbc_pass = uri.password
+@jdbc_max_size = ENV["POSTGRESQL_POOL_MAX_SIZE"].nil? ? 10 : ENV["POSTGRESQL_POOL_MAX_SIZE"]
+
 @admin_password = BCrypt::Password.create(ENV["GRAVITEE_ADMIN_PASSWORD"])
 
 # Optional configuration to send emails

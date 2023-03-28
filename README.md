@@ -77,7 +77,7 @@ Common to all modules:
 
 **Required:**
 
-* `MONGO_URL`: URL to the mongodb replicaset, automatically provided by a Scalingo Addon
+* `POSTGRESQL_URL`: URL to the PostreSQL, automatically provided by a Scalingo Addon
 * `ELASTICSEARCH_URL`: URL to the elasticsearch cluster, automatically provided by a Scalingo Elasticsearch Addon
 * `GRAVITEE_JWT_SECRET`: Secret which will be used to sign/encrypt JWT tokens, must be a long random string
 * `GRAVITEE_PORTAL_URL`: URL to the deployment of the Portal UI, example: `https://my-gravitee-portal.osc-fr1.scalingo.io`
@@ -90,18 +90,22 @@ Common to all modules:
 * `MAIL_URL`: no default, configure which SMTP server should send emails, example: `smtp://username:password@smtpserver.example.com:587`
 * `MAIL_SUBJECT_FORMAT`: no default, configure the format of the subjects of emails being sent, use `%s` for the rest of the subject, example: `[Gravitee.io] %s`
 * `MAIL_SENDER_FROM`: no default, configure which email address with be used to send the emails from, example: `from@example.com`
+* `POSTGRESQL_POOL_MAX_SIZE`: Maximum pool connection size on PostgreSQL
+* `JDBC_DRIVER_VERSION`: Version of jdbc driver (default: 42.5.4)
 
 ### graviteeio-gateway
 
 **Required:**
 
-* `MONGO_URL`: URL to the mongodb replicaset, must be the same than the REST API, copy/paste the value for the gateway app
+* `POSTGRESQL_URL`: URL to the PostgreSQL, must be the same than the REST API, copy/paste the value for the gateway app
 * `ELASTICSEARCH_URL`: URL to the elasticsearch cluster, must be the same than the REST API, copy/paste the value for the gateway app
 
 **Optional:**
 
 * `JVM_COMMON_BUILDPACK`: (optional) by default `https://buildpacks-repository.s3.eu-central-1.amazonaws.com/jvm-common.tar.xz`
 * `GRAVITEE_HEARTBEAT_ENABLED`: (optional) by default `false`, configure wether or not the gateway should report its status to the REST API
+* `POSTGRESQL_POOL_MAX_SIZE`: Maximum pool connection size on PostgreSQL
+* `JDBC_DRIVER_VERSION`: Version of jdbc driver (default: 42.5.4)
 
 ### graviteeio-apim-portal-ui
 

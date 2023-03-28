@@ -14,6 +14,7 @@ BP_DIR=$(cd "$(dirname $0)/.." && pwd)
 source "${BP_DIR}/lib/output.sh"
 source "${BP_DIR}/lib/nginx.sh"
 source "${BP_DIR}/lib/java.sh"
+source "${BP_DIR}/lib/jdbc.sh"
 
 # Configuration from the environment
 GRAVITEE_VERSION="${GRAVITEE_VERSION:-3.8.3}"
@@ -82,6 +83,8 @@ fi
 if [ "$GRAVITEE_MODULE" = "graviteeio-apim-rest-api" -o "$GRAVITEE_MODULE" = "graviteeio-apim-gateway" ] ; then
   echo "java.runtime.version=11" > "${BUILD_DIR}/system.properties"
   install_jdk "$BUILD_DIR" "$CACHE_DIR"
+
+  install_jdbc "$BUILD_DIR" "$CACHE_DIR" "$GRAVITEE_MODULE" "${JDBC_DRIVER_VERSION:-42.5.4}"
 fi
 
 if [ "$GRAVITEE_MODULE" = "graviteeio-apim-portal-ui" -o "$GRAVITEE_MODULE" = "graviteeio-apim-console-ui" ] ; then
